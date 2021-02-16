@@ -1,3 +1,5 @@
+const createListOfDifficulty = require('../helper');
+
 export default function initRouteModel(sequelize, DataTypes) {
   return sequelize.define(
     'route',
@@ -12,7 +14,10 @@ export default function initRouteModel(sequelize, DataTypes) {
         type: DataTypes.STRING,
       },
       difficulty: {
-        type: DataTypes.STRING,
+        type: DataTypes.ENUM(createListOfDifficulty()),
+      },
+      order: {
+        type: DataTypes.INTEGER,
       },
       tripId: {
         type: DataTypes.INTEGER,
@@ -34,6 +39,6 @@ export default function initRouteModel(sequelize, DataTypes) {
     {
       // The underscored option makes Sequelize reference snake_case names in the DB.
       underscored: true,
-    }
+    },
   );
-};
+}

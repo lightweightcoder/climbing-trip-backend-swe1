@@ -1,12 +1,10 @@
-'use strict';
+const faker = require('faker');
+const createListOfDifficulty = require('../helper.js');
 
-const difficulties = [1,2,3,4,5.0,5.1,5.2,5.3,5.4,5.5,5.6,5.7,5.8,5.9,5.10,5.11,5.12,5.13,5.14,5.15];
-
-var faker = require('faker');
-
+const difficulties = createListOfDifficulty();
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-     const tripsList = [
+    const tripsList = [
       {
         name: 'krabi',
         created_at: new Date(),
@@ -20,35 +18,35 @@ module.exports = {
     ];
 
     // Insert categories before items because items reference categories
-    let trips = await queryInterface.bulkInsert(
+    const trips = await queryInterface.bulkInsert(
       'trips',
       tripsList,
-      { returning: true }
+      { returning: true },
     );
 
     const routes = [];
 
-    for (let i = 0; i < trips.length; i++) {
-      const trip = trips[i];
-
-      for (let i = 0; i < 15; i++) {
-        var noun = faker.company.bsNoun(); // Rowan Nikolaus
-        var adjective = faker.commerce.productAdjective(); // Rowan Nikolaus
-        var difficulty = difficulties[Math.floor(Math.random() * difficulties.length)];
+    for (let i = 1; i < trips.length + 1; i += 1) {
+      // const trip = trips[i];
+      for (let j = 1; j < 16; j += 1) {
+        const noun = faker.company.bsNoun(); // Rowan Nikolaus
+        const adjective = faker.commerce.productAdjective(); // Rowan Nikolaus
+        const difficulty = difficulties[Math.floor(Math.random() * difficulties.length)];
 
         routes.push({
           name: `${adjective} ${noun}`,
-          trip_id: trip.id,
+          trip_id: i,
           difficulty,
+          order: j,
           created_at: new Date(),
           updated_at: new Date(),
         });
-
       }
     }
+    console.log(routes, 'routes');
 
     queryInterface.bulkInsert('routes', routes);
   },
 
-  down: async (queryInterface, Sequelize) => {}
+  down: async (queryInterface, Sequelize) => {},
 };

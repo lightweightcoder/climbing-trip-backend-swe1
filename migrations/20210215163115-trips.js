@@ -1,8 +1,12 @@
+const createListOfDifficulty = require('../helper.js');
+
 'use strict';
+
+console.log(createListOfDifficulty(), 'test');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-     await queryInterface.createTable('trips', {
+    await queryInterface.createTable('trips', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -32,7 +36,10 @@ module.exports = {
         type: Sequelize.STRING,
       },
       difficulty: {
-        type: Sequelize.STRING,
+        type: Sequelize.ENUM(createListOfDifficulty()),
+      },
+      order: {
+        type: Sequelize.INTEGER,
       },
       created_at: {
         allowNull: false,
@@ -55,5 +62,5 @@ module.exports = {
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('trips');
     await queryInterface.dropTable('routes');
-  }
+  },
 };
