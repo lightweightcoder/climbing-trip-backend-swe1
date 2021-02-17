@@ -11,6 +11,9 @@ export default function initTripModel(sequelize, DataTypes) {
       name: {
         type: DataTypes.STRING,
       },
+      description: {
+        type: DataTypes.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: DataTypes.DATE,
@@ -23,6 +26,6 @@ export default function initTripModel(sequelize, DataTypes) {
     {
       // The underscored option makes Sequelize reference snake_case names in the DB.
       underscored: true,
-    }
+    },
   );
-};
+}

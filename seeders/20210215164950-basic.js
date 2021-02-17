@@ -7,11 +7,13 @@ module.exports = {
     const tripsList = [
       {
         name: 'krabi',
+        description: 'The capital of southern Thailand\'s Krabi Province, is a resort town near the Andaman coast.',
         created_at: new Date(),
         updated_at: new Date(),
       },
       {
         name: 'yosemite',
+        description: 'Yosemite National Park is in California’s Sierra Nevada mountains. It’s famed for its giant, ancient sequoia trees, and for Tunnel View, the iconic vista of towering Bridalveil Fall and the granite cliffs of El Capitan and Half Dome.',
         created_at: new Date(),
         updated_at: new Date(),
       },
