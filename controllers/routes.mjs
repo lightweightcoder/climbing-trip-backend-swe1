@@ -1,16 +1,17 @@
 // db is an argument to this function so
 // that we can make db queries inside
 export default function initRoutesController(db) {
-  const index = (request, response) => {
+  const index = (req, res) => {
+    const { tripId } = req.params;
     db.Route.findAll(
       {
         where: {
-          tripId: 1,
+          tripId,
         },
       },
     )
       .then((routes) => {
-        response.send({ routes });
+        res.send({ routes });
       })
       .catch((error) => console.log(error));
   };
