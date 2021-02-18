@@ -1,4 +1,4 @@
-const createListOfDifficulty = require('../helper');
+import createListOfDifficulty from '../helper.js';
 
 export default function initRouteModel(sequelize, DataTypes) {
   return sequelize.define(
