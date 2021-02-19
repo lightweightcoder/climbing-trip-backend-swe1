@@ -38,12 +38,6 @@ export default function initRoutesController(db) {
           },
         });
       }
-      // Otherwise create a new route
-      db.Route.create({
-        name,
-        difficulty,
-        order,
-      });
     });
 
     // Wait for all the promises to resolve before sending res to client
@@ -55,10 +49,25 @@ export default function initRoutesController(db) {
       .catch((err) => console.log(err));
   };
 
+  const create = (req, res) => {
+    const { tripId } = req.params;
+    const routeToCreate = req.body;
+    console.log('routeToCreate', routeToCreate);
+    console.log('tripId', tripId);
+
+    db.Route.create({ ...routeToCreate, tripId })
+      .then((newRoute) => {
+        console.log(newRoute, 'newRoute');
+        res.send({ message: 'created route' });
+      })
+      .catch((err) => console.log(err));
+  };
+
   // return all methods we define in an object
   // refer to the routes file above to see this used
   return {
     index,
     update,
+    create,
   };
 }
